@@ -1,0 +1,41 @@
+tumblr:
+  blogs:
+    - name:
+      url:
+      auth:
+        consumer_key:
+        consumer_secret:
+        oauth_token:
+        oauth_token_secret:
+    - name:
+      url:
+      auth:
+        consumer_key:
+        consumer_secret:
+        oauth_token:
+        oauth_token_secret:
+  tags:
+google:
+  app_name:
+  oauth:
+    client_id:
+    client_secret:
+    api_key:
+    redirect_uri:
+  email:
+  password:
+  post:
+    title_prefix:
+    description:
+    category:
+    tags:
+twitter:
+  oauth:
+    consumer_key:
+    consumer_secret:
+    access_token:
+    access_token_secret:
+s3:
+  access_key_id:
+  secret_access_key:
+  bucket:
