@@ -11,9 +11,11 @@ blogs = CONFIG['tumblr']['blogs']
 
 blog1 = blogs.first
 blog2 = blogs.last
+auth1 = Hash[blog1['auth'].map { |k, v| [k.to_sym, v] }]
+auth2 = Hash[blog2['auth'].map { |k, v| [k.to_sym, v] }]
 
-t1 = Tumblr::Client.new(blog1['auth'])
-t2 = Tumblr::Client.new(blog2['auth'])
+t1 = Tumblr::Client.new(auth1)
+t2 = Tumblr::Client.new(auth2)
 
 posts = t2.posts(blog2['url'], limit: 20, notes_info: true)['posts'].sort { |p| p['timestamp'] }
 posts.each do |post|
