@@ -5,7 +5,7 @@ require 'yaml'
 print "----- #{Time.now.to_s} -----\n"
 
 PATH = File.expand_path(File.dirname(__FILE__))
-CONFIG = YAML.load_file(PATH + '/config/create-video-config.yml')
+CONFIG = YAML.load_file(PATH + '/config.yml')
 
 blogs = CONFIG['tumblr']['blogs']
 
