@@ -49,7 +49,8 @@ num_posts = nil
 t = nil
 
 CONFIG['tumblr']['blogs'].each do |blog|
-  t = Tumblr::Client.new(blog['auth'])
+  auth = Hash[blog['auth'].map { |k, v| [k.to_sym, v] }]
+  t = Tumblr::Client.new(auth)
   url = blog['url']
   num_posts = t.posts(url, type: :video, limit: 20, reblog_info: true)['posts'].keep_if { |p| Time.at(p['timestamp']) >= Time.now - 60 * 60 * 24 }.keep_if { |p| [blog['name'], nil].include? p['reblogged_from_name'] }.count
   
@@ -130,13 +131,13 @@ result = client.video_upload(
 
 if result.respond_to?(:unique_id) and result.unique_id
   twitter = Twitter::REST::Client.new do |config|
-    config.consumer_key        = CONFIG['ouath']['consumer_key']
-    config.consumer_secret     = CONFIG['ouath']['consumer_secret']
-    config.access_token        = CONFIG['oauth']['access_token']
-    config.access_token_secret = CONFIG['oauth']['access_toen_secret']
+    config.consumer_key        = CONFIG['twitter']['oauth']['consumer_key']
+    config.consumer_secret     = CONFIG['twitter']['oauth']['consumer_secret']
+    config.access_token        = CONFIG['twitter']['oauth']['access_token']
+    config.access_token_secret = CONFIG['twitter']['oauth']['access_token_secret']
   end
 
-  tweet = twitter.update("#{result.title} http://youtube.com/watchv?=#{result.unique_id}")
+  tweet = twitter.update("#{result.title} http://youtube.com/watch?v=#{result.unique_id}")
   print "tweeted #{tweet.uri}\n"
 end
 

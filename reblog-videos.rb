@@ -8,12 +8,10 @@ PATH = File.expand_path(File.dirname(__FILE__))
 CONFIG = YAML.load_file(PATH + '/config.yml')
 
 blogs = CONFIG['tumblr']['blogs']
-
 blog1 = blogs.first
 blog2 = blogs.last
 auth1 = Hash[blog1['auth'].map { |k, v| [k.to_sym, v] }]
 auth2 = Hash[blog2['auth'].map { |k, v| [k.to_sym, v] }]
-
 t1 = Tumblr::Client.new(auth1)
 t2 = Tumblr::Client.new(auth2)
 
